@@ -1,0 +1,55 @@
+name: suits
+description: "A new Flutter project." 
+publish_to: 'none'  
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_screenutil:
+  flutter_svg:
+  image_picker:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  
+  fonts:
+    - family: inter
+      fonts:
+        - asset: assets/fonts/Inter.ttf
+    - family: waterfall
+      fonts: 
+        - asset: assets/fonts/waterfall-Regular.ttf
+    - family: aRIAL
+      fonts:
+        - asset: assets/fonts/aRIAL.ttf
+          weight: 400
+        - asset: assets/fonts/aRIALBD.ttf
+          weight: 700
+
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+ 
