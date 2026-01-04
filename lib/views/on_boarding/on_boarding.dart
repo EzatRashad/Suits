@@ -80,7 +80,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     child: Container(
                       alignment: Alignment.center,
                       width: 81.w,
-                      height: 41.h,
+                      height: 40.h,
 
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.r),
