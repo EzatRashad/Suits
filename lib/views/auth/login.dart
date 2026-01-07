@@ -9,31 +9,27 @@ import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/core/widgets/login_or_signup.dart';
 import 'package:suits/core/widgets/or_divider.dart';
 import 'package:suits/core/widgets/social_media_btn.dart';
-import 'package:suits/views/auth/login/login.dart';
+import 'package:suits/views/auth/signup.dart';
 
-class SignupView extends StatefulWidget {
-  const SignupView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<SignupView> createState() => _SignupViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _SignupViewState extends State<SignupView> {
+class _LoginViewState extends State<LoginView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final nameController = TextEditingController();
 
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
-  final nameFocusNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
-  bool isChecked = false;
 
   bool obscureText = true;
   bool emailError = false;
   bool passwordError = false;
-  bool nameError = false;
 
   @override
   void initState() {
@@ -41,17 +37,14 @@ class _SignupViewState extends State<SignupView> {
 
     emailFocusNode.addListener(() => setState(() {}));
     passwordFocusNode.addListener(() => setState(() {}));
-    nameFocusNode.addListener(() => setState(() {}));
   }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    nameController.dispose();
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
-    nameFocusNode.dispose();
     super.dispose();
   }
 
@@ -69,38 +62,19 @@ class _SignupViewState extends State<SignupView> {
                 children: [
                   11.ph,
                   Text(
-                    'Sign Up',
+                    'Login',
                     style: theme.titleLarge!.copyWith(
                       fontSize: 18.sp,
                       color: AppColors.black2,
                     ),
                   ),
-                  32.ph,
-                  AppInput(
-                    controller: nameController,
-                    focusNode: nameFocusNode,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: AppImage(
-                        imageName: nameError
-                            ? "active_name.png"
-                            : (nameFocusNode.hasFocus
-                                  ? "active_name.png"
-                                  : "name.png"),
-                        width: 24.w,
-                      ),
-                    ),
-                    hint: "Enter your name",
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        setState(() => nameError = true);
-                        return "Invalid name";
-                      }
-                      setState(() => nameError = false);
-                      return null;
-                    },
+                  26.ph,
+                  Text(
+                    'Hi Welcome back, you’ve been missed',
+                    style: theme.titleMedium!.copyWith(fontSize: 12.sp),
                   ),
-                  16.ph,
+                  39.ph,
+
                   AppInput(
                     controller: emailController,
                     focusNode: emailFocusNode,
@@ -127,7 +101,7 @@ class _SignupViewState extends State<SignupView> {
                       return null;
                     },
                   ),
-                  16.ph,
+                  26.ph,
 
                   AppInput(
                     controller: passwordController,
@@ -164,70 +138,24 @@ class _SignupViewState extends State<SignupView> {
                       return null;
                     },
                   ),
-                  14.ph,
-                  Row(
-                    crossAxisAlignment: .start,
-                    children: [
-                      GestureDetector(
-                        onTap: () => setState(() => isChecked = !isChecked),
-                        child: Container(
-                          width: 25.w,
-                          height: 25.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: AppColors.borderColor),
-                          ),
-                          child: isChecked
-                              ? Icon(
-                                  Icons.check,
-                                  color: AppColors.primary,
-                                  size: 16.sp,
-                                )
-                              : null,
+                  10.ph,
+                  Align(
+                    alignment: AlignmentDirectional.topEnd,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "Forgot Password?",
+                        style: theme.titleMedium!.copyWith(
+                          fontSize: 12.sp,
+                          fontVariations: [FontVariation('wght', 500)],
+                          color: AppColors.primary,
                         ),
                       ),
-                      17.pw,
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "I agree to the medidoc ",
-                              style: theme.titleSmall!.copyWith(
-                                color: AppColors.black,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "Terms of Service",
-                              style: theme.titleSmall!.copyWith(
-                                color: AppColors.primary,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                            TextSpan(
-                              text: " \nand ",
-                              style: theme.titleSmall!.copyWith(
-                                color: AppColors.black,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "Privacy Policy",
-                              style: theme.titleSmall!.copyWith(
-                                color: AppColors.primary,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  38.ph,
-
+                  22.ph,
                   AppButton(
-                    title: "Sign Up",
+                    title: "Login",
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -250,11 +178,28 @@ class _SignupViewState extends State<SignupView> {
                   ),
                   19.ph,
                   LoginOrSignup(
-                    title1: "Have an account?",
-                    title2: "Login",
+                    title1: "Don't have an account?",
+                    title2: "Sign Up",
                     onTap: () {
-                      context.nextScreen(LoginView());
+                      context.nextScreen(SignupView());
                     },
+                  ),
+                  21.ph,
+                  OrDivider(),
+                  30.ph,
+                  SocialMediaBtn(
+                    imageName: "google.png",
+                    title: "Login with Google",
+                  ),
+                  10.ph,
+                  SocialMediaBtn(
+                    imageName: "apple.png",
+                    title: "Login with Apple",
+                  ),
+                  10.ph,
+                  SocialMediaBtn(
+                    imageName: "facebook.png",
+                    title: "Login with Facebook",
                   ),
                 ],
               ),

@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
-import 'package:suits/views/auth/login/login.dart';
+import 'package:suits/views/auth/login.dart';
 
 import '../../core/utils/navigate.dart';
-import 'indicator.dart';
+import 'widgets/indicator.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
@@ -78,22 +78,27 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 81.w,
-                      height: 40.h,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.nextScreen(const LoginView());
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 81.w,
+                        height: 40.h,
 
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.r),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      child: Text(
-                        "Skip",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontFamily: "aRIAL",
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.r),
+                          border: Border.all(color: AppColors.black),
+                        ),
+                        child: Text(
+                          "Skip",
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontFamily: "aRIAL",
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
