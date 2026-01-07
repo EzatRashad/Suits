@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
+import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/app_input.dart';
@@ -8,6 +9,7 @@ import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/core/widgets/login_or_signup.dart';
 import 'package:suits/core/widgets/or_divider.dart';
 import 'package:suits/core/widgets/social_media_btn.dart';
+import 'package:suits/views/auth/signup/signup.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -178,7 +180,9 @@ class _LoginViewState extends State<LoginView> {
                   LoginOrSignup(
                     title1: "Don't have an account?",
                     title2: "Sign Up",
-                    onTap: () {},
+                    onTap: () {
+                      context.nextScreen(SignupView());
+                    },
                   ),
                   21.ph,
                   OrDivider(),
