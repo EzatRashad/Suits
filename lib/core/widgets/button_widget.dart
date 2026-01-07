@@ -14,13 +14,14 @@ class AppButton extends StatelessWidget {
   final Color? textColor, buttonColor, borderColor;
   final void Function()? onTap;
   final bool withBorder;
+  final List<FontVariation>? fontVariations;
 
   const AppButton({
     super.key,
     this.gradient,
     this.title = "OK",
     this.width = double.infinity,
-    this.height = 58.0,
+    this.height = 56.0,
     this.onTap,
     this.fontFamily,
     this.child,
@@ -31,7 +32,8 @@ class AppButton extends StatelessWidget {
     this.buttonColor,
     this.borderColor,
     this.withBorder = false,
-    this.radius = 16.0,
+    this.radius = 32.0,
+    this.fontVariations,
   });
 
   @override
@@ -41,9 +43,9 @@ class AppButton extends StatelessWidget {
       // height: height,
       decoration: BoxDecoration(
         // gradient: gradient,
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(radius.r),
       ),
-      constraints: BoxConstraints(minWidth: width, minHeight: height),
+      constraints: BoxConstraints(minWidth: width, minHeight: height.h),
       child: ElevatedButton(
         onPressed: onTap,
         style: ButtonStyle(
@@ -54,7 +56,7 @@ class AppButton extends StatelessWidget {
           shadowColor: WidgetStateProperty.all<Color>(AppColors.transparent),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius),
+              borderRadius: BorderRadius.circular(radius.r),
               side: withBorder
                   ? BorderSide(color: borderColor ?? AppColors.primary)
                   : BorderSide(color: AppColors.transparent),
@@ -65,46 +67,13 @@ class AppButton extends StatelessWidget {
             child ??
             Text(
               title,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: AppColors.white),
+              style: TextStyle(
+                fontSize: fontSize ?? 16.sp,
+                fontVariations: fontVariations ?? [FontVariation('wght', 700)],
+                fontFamily: fontFamily ?? "Inter",
+                color: textColor ?? AppColors.white,
+              ),
             ),
-      ),
-    );
-  }
-}
-
-class TextButtonWidget extends StatelessWidget {
-  const TextButtonWidget({
-    super.key,
-    required this.function,
-    required this.text,
-    this.fontweight,
-    this.color,
-    this.size,
-    this.fontFamily,
-  });
-  final Function function;
-  final String text;
-  final double? size;
-  final Color? color;
-  final FontWeight? fontweight;
-  final String? fontFamily;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        function();
-      },
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: fontweight ?? FontWeight.w500,
-          fontFamily: fontFamily ?? "Almarai",
-          fontSize: size ?? 16.sp,
-          color: color ?? AppColors.white,
-        ),
       ),
     );
   }

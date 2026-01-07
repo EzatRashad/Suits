@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/utils.dart';
-import 'package:suits/core/widgets/custom_image_widget.dart';
+import 'package:suits/core/widgets/App_image.dart';
+import 'package:suits/views/auth/login/login.dart';
 
 import '../../core/utils/navigate.dart';
 import 'indicator.dart';
@@ -147,7 +148,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       GestureDetector(
                         onTap: () {
                           if (currentPage == onboardingData.length - 1) {
-                            context.nextScreen(const Scaffold());
+                            context.nextScreen(const LoginView());
                           } else {
                             pageController.nextPage(
                               duration: const Duration(milliseconds: 300),

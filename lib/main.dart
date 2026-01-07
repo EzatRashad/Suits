@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_theme.dart';
 import 'package:suits/views/splash.dart';
 
-void main() {
+void main() async {
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -16,15 +17,14 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 800),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_ , child) {
+      builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-           theme: AppTheme.lightTheme,
-          themeMode: AppTheme.currentTheme,
+          theme: AppTheme.lightTheme,
           home: child,
         );
       },
-      child: SplashView(),
+      child: const SplashView(),
     );
   }
 }
