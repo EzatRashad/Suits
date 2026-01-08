@@ -6,10 +6,10 @@ import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/app_input.dart';
 import 'package:suits/core/widgets/button_widget.dart';
-import 'package:suits/core/widgets/login_or_signup.dart';
-import 'package:suits/core/widgets/or_divider.dart';
-import 'package:suits/core/widgets/social_media_btn.dart';
-import 'package:suits/core/widgets/success_dialog.dart';
+import 'package:suits/views/auth/widgets/login_or_signup.dart';
+import 'package:suits/views/auth/widgets/or_divider.dart';
+import 'package:suits/views/auth/widgets/social_media_btn.dart';
+import 'package:suits/views/auth/widgets/success_dialog.dart';
 import 'package:suits/views/auth/login.dart';
 
 class SignupView extends StatefulWidget {
