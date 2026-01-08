@@ -9,6 +9,7 @@ import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/core/widgets/login_or_signup.dart';
 import 'package:suits/core/widgets/or_divider.dart';
 import 'package:suits/core/widgets/social_media_btn.dart';
+import 'package:suits/core/widgets/success_dialog.dart';
 import 'package:suits/views/auth/signup.dart';
 
 class LoginView extends StatefulWidget {
@@ -157,23 +158,33 @@ class _LoginViewState extends State<LoginView> {
                   AppButton(
                     title: "Login",
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Logging in...')),
-                        );
+                      // if (_formKey.currentState!.validate()) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     const SnackBar(content: Text('Logging in...')),
+                      //   );
 
-                        print("Email: ${emailController.text}");
-                        print("Password: ${passwordController.text}");
-                      } else {
-                        setState(() {
-                          emailError =
-                              emailController.text.isEmpty ||
-                              !emailController.text.contains("@");
-                          passwordError =
-                              passwordController.text.isEmpty ||
-                              passwordController.text.length < 6;
-                        });
-                      }
+                      //   print("Email: ${emailController.text}");
+                      //   print("Password: ${passwordController.text}");
+                      // } else {
+                      //   setState(() {
+                      //     emailError =
+                      //         emailController.text.isEmpty ||
+                      //         !emailController.text.contains("@");
+                      //     passwordError =
+                      //         passwordController.text.isEmpty ||
+                      //         passwordController.text.length < 6;
+                      //   });
+                      // }
+                      showDialog(
+                        context: context,
+                        builder: (context) => const SuccessDialog(
+                          title: "Yeay! Welcome Back",
+                          message:
+                              'Once again you login successfully into medidoc app',
+                          btnTitle: 'Go to home',
+                          screen: Scaffold(),
+                        ),
+                      );
                     },
                   ),
                   19.ph,

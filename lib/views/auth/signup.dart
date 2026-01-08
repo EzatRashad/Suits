@@ -9,6 +9,7 @@ import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/core/widgets/login_or_signup.dart';
 import 'package:suits/core/widgets/or_divider.dart';
 import 'package:suits/core/widgets/social_media_btn.dart';
+import 'package:suits/core/widgets/success_dialog.dart';
 import 'package:suits/views/auth/login.dart';
 
 class SignupView extends StatefulWidget {
@@ -173,17 +174,14 @@ class _SignupViewState extends State<SignupView> {
                         child: Container(
                           width: 25.w,
                           height: 25.h,
+                          padding: EdgeInsets.all(3.r),
                           decoration: BoxDecoration(
                             color: AppColors.white,
                             borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(color: AppColors.borderColor),
                           ),
                           child: isChecked
-                              ? Icon(
-                                  Icons.check,
-                                  color: AppColors.primary,
-                                  size: 16.sp,
-                                )
+                              ? AppImage(imageName: "check.svg")
                               : null,
                         ),
                       ),
@@ -229,23 +227,33 @@ class _SignupViewState extends State<SignupView> {
                   AppButton(
                     title: "Sign Up",
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Logging in...')),
-                        );
+                      // if (_formKey.currentState!.validate()) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     const SnackBar(content: Text('Logging in...')),
+                      //   );
 
-                        print("Email: ${emailController.text}");
-                        print("Password: ${passwordController.text}");
-                      } else {
-                        setState(() {
-                          emailError =
-                              emailController.text.isEmpty ||
-                              !emailController.text.contains("@");
-                          passwordError =
-                              passwordController.text.isEmpty ||
-                              passwordController.text.length < 6;
-                        });
-                      }
+                      //   print("Email: ${emailController.text}");
+                      //   print("Password: ${passwordController.text}");
+                      // } else {
+                      //   setState(() {
+                      //     emailError =
+                      //         emailController.text.isEmpty ||
+                      //         !emailController.text.contains("@");
+                      //     passwordError =
+                      //         passwordController.text.isEmpty ||
+                      //         passwordController.text.length < 6;
+                      //   });
+                      // }
+                      showDialog(
+                        context: context,
+                        builder: (context) => const SuccessDialog(
+                          title: "Success",
+                          message:
+                              "Your account has been successfully registered",
+                          btnTitle: "Login",
+                          screen: LoginView(),
+                        ),
+                      );
                     },
                   ),
                   19.ph,
