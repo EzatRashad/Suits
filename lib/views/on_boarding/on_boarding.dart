@@ -4,6 +4,7 @@ import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/views/auth/login.dart';
+import 'package:suits/views/on_boarding/get_start.dart';
 
 import '../../core/utils/navigate.dart';
 import 'widgets/indicator.dart';
@@ -80,7 +81,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        context.nextScreen(const LoginView());
+                        context.nextScreen(const GetStartView());
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -153,7 +154,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       GestureDetector(
                         onTap: () {
                           if (currentPage == onboardingData.length - 1) {
-                            context.nextScreen(const LoginView());
+                            context.nextScreen(const GetStartView());
                           } else {
                             pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
