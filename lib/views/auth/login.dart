@@ -6,6 +6,7 @@ import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/app_input.dart';
 import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/views/auth/forget_password.dart';
 import 'package:suits/views/auth/widgets/login_or_signup.dart';
 import 'package:suits/views/auth/widgets/or_divider.dart';
 import 'package:suits/views/auth/widgets/social_media_btn.dart';
@@ -143,7 +144,9 @@ class _LoginViewState extends State<LoginView> {
                   Align(
                     alignment: AlignmentDirectional.topEnd,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.nextScreen(ForgetPasswordView());
+                      },
                       child: Text(
                         "Forgot Password?",
                         style: theme.titleMedium!.copyWith(

@@ -3,19 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
-import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/views/auth/new_password.dart';
 import 'package:suits/views/auth/widgets/login_or_signup.dart';
 import 'package:suits/views/auth/widgets/verify_code_fields.dart';
 
-class Otp extends StatefulWidget {
-  const Otp({super.key});
+class OtpView extends StatefulWidget {
+  const OtpView({super.key});
 
   @override
-  State<Otp> createState() => _OtpViewState();
+  State<OtpView> createState() => _OtpViewState();
 }
 
-class _OtpViewState extends State<Otp> {
+class _OtpViewState extends State<OtpView> {
   final phoneController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -101,7 +101,9 @@ class _OtpViewState extends State<Otp> {
               31.ph,
               AppButton(
                 title: "Verify",
-                onTap: () {},
+                onTap: () {
+                  context.nextScreen(const NewPasswordView());
+                },
                 radius: 32.r,
                 buttonColor: AppColors.primary,
               ),

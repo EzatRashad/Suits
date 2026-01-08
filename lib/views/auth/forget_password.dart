@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suits/core/style/app_colors.dart';
+import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/app_input.dart';
 import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/views/auth/otp.dart';
 import 'package:suits/views/auth/widgets/phone_or_email.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
+class ForgetPasswordView extends StatefulWidget {
+  const ForgetPasswordView({super.key});
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   bool isEmail = true;
 
   final emailController = TextEditingController();
@@ -125,7 +126,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
             32.ph,
 
-            AppButton(title: "Reset Password", onTap: () {}),
+            AppButton(
+              title: "Reset Password",
+              onTap: () {
+                context.nextScreen(const OtpView());
+              },
+            ),
           ],
         ),
       ),

@@ -7,14 +7,14 @@ import 'package:suits/core/widgets/app_input.dart';
 import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/views/auth/widgets/success_dialog.dart';
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({super.key});
+class NewPasswordView extends StatefulWidget {
+  const NewPasswordView({super.key});
 
   @override
-  State<NewPassword> createState() => _NewPasswordState();
+  State<NewPasswordView> createState() => _NewPasswordViewState();
 }
 
-class _NewPasswordState extends State<NewPassword> {
+class _NewPasswordViewState extends State<NewPasswordView> {
   final passwordController = TextEditingController();
   final passwordController2 = TextEditingController();
   final FocusNode passwordFocusNode = FocusNode();

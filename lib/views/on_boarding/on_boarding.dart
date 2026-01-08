@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
-import 'package:suits/views/auth/login.dart';
 import 'package:suits/views/on_boarding/get_start.dart';
 
 import '../../core/utils/navigate.dart';
