@@ -1,0 +1,188 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suits/core/style/app_colors.dart';
+import 'package:suits/core/utils/utils.dart';
+import 'package:suits/core/widgets/App_image.dart';
+import 'package:suits/core/widgets/button_widget.dart';
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
+    final list = [
+      Model(title: "Blazar", image: "suit.png"),
+      Model(title: "Shirt", image: "shirt.png"),
+      Model(title: "Men Shoes", image: "men _shoes.png"),
+      Model(title: "Women Shoes", image: "women _shoes.png"),
+    ];
+
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
+          slivers: [
+            SliverAppBar(
+              floating: true,
+              backgroundColor: AppColors.background,
+              toolbarHeight: kToolbarHeight + 22.h,
+              
+              title: Text(' Hello Safia', style: theme.titleLarge),
+              actions: [
+                Container(
+                  width: 40.w,
+                  height: 40.h,
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const AppImage(imageName: "bell.png"),
+                ),
+                16.pw,
+              ],
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 17.h),
+                decoration: const BoxDecoration(color: AppColors.white),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "New Collection",
+                            style: theme.titleLarge!.copyWith(fontSize: 16.sp),
+                          ),
+                          5.ph,
+                          Text(
+                            "Disscount 50% for\nthe first transaction",
+                            style: theme.titleSmall!.copyWith(
+                              fontSize: 12.sp,
+                              fontVariations: [
+                                const FontVariation("wght", 500),
+                              ],
+                            ),
+                          ),
+                          18.ph,
+                          AppButton(
+                            title: "Shop Now",
+                            height: 29.h,
+                            width: 100.w,
+                            radius: 10.r,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Expanded(child: AppImage(imageName: "banner.png")),
+                  ],
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(child: 28.ph),
+
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  Text("Categary", style: theme.titleLarge),
+                  const Spacer(),
+                  Text(
+                    "See All",
+                    style: theme.titleSmall!.copyWith(
+                      fontSize: 15.sp,
+                      color: const Color(0xff4E6542),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SliverToBoxAdapter(child: 18.ph),
+
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 100.h,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15.r),
+                          width: 50.w,
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.primary),
+                          ),
+                          child: AppImage(imageName: list[index].image),
+                        ),
+                        5.ph,
+                        Text(
+                          list[index].title,
+                          textAlign: TextAlign.center,
+                          style: theme.titleLarge!.copyWith(
+                            fontSize: 12.sp,
+                            color: const Color(0xff676767),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return 25.pw;
+                  },
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(child: 30.ph),
+
+            SliverToBoxAdapter(
+              child: Text("Flash Sale", style: theme.titleLarge),
+            ),
+
+            SliverToBoxAdapter(child: 30.ph),
+
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Container(
+                    color: AppColors.white,
+                    child: const AppImage(imageName: "pr.png"),
+                  ),
+                );
+              }, childCount: 6),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 149.w / 140.h,
+                mainAxisSpacing: 16.h,
+                crossAxisSpacing: 16.w,
+              ),
+            ),
+
+            SliverToBoxAdapter(child: 20.ph),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Model {
+  final String title;
+  final String image;
+
+  Model({required this.title, required this.image});
+}

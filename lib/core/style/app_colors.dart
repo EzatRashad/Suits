@@ -7,6 +7,7 @@ class AppColors {
   static Color borderColor = Color(0xffE5E7EB);
   static const Color error = Color(0xFFF40000);
   static const Color red = Color(0xFFCD0F0F);
+  static const Color navIcon = Color(0xFF676767);
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);

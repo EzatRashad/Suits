@@ -12,6 +12,7 @@ import 'package:suits/views/auth/widgets/or_divider.dart';
 import 'package:suits/views/auth/widgets/social_media_btn.dart';
 import 'package:suits/views/auth/widgets/success_dialog.dart';
 import 'package:suits/views/auth/signup.dart';
+import 'package:suits/views/layout/layout.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -185,7 +186,7 @@ class _LoginViewState extends State<LoginView> {
                           message:
                               'Once again you login successfully into medidoc app',
                           btnTitle: 'Go to home',
-                          screen: Scaffold(),
+                          screen: LayoutView(),
                         ),
                       );
                     },
