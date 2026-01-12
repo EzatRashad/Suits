@@ -6,20 +6,28 @@ import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/button_widget.dart';
 import 'package:suits/views/layout/pages/product_details/product_details.dart';
+import 'package:suits/views/layout/widgets/tab_list.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final categoriesList = [
+    Model(title: "Blazar", image: "suit.png"),
+    Model(title: "Shirt", image: "shirt.png"),
+    Model(title: "Men Shoes", image: "men _shoes.png"),
+    Model(title: "Women Shoes", image: "women _shoes.png"),
+  ];
+  final tabList = ["All", "Men", "Women", "Shoes", "Accessories", "Jewelry"];
+  int tabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-
-    final list = [
-      Model(title: "Blazar", image: "suit.png"),
-      Model(title: "Shirt", image: "shirt.png"),
-      Model(title: "Men Shoes", image: "men _shoes.png"),
-      Model(title: "Women Shoes", image: "women _shoes.png"),
-    ];
 
     return Scaffold(
       body: Padding(
@@ -28,26 +36,28 @@ class HomeView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
 
           slivers: [
-            SliverAppBar(
-              floating: true,
-              backgroundColor: AppColors.background,
-              toolbarHeight: kToolbarHeight + 22.h,
-              
-              title: Text(' Hello Safia', style: theme.titleLarge),
-              actions: [
-                Container(
-                  width: 40.w,
-                  height: 40.h,
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: AppColors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const AppImage(imageName: "bell.png"),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.h),
+                child: Row(
+                  children: [
+                    Text(' Hello Safia', style: theme.titleLarge),
+                    Spacer(),
+                    Container(
+                      width: 40.w,
+                      height: 40.h,
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const AppImage(imageName: "bell.png"),
+                    ),
+                  ],
                 ),
-                16.pw,
-              ],
+              ),
             ),
+
             SliverToBoxAdapter(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 17.h),
@@ -113,7 +123,7 @@ class HomeView extends StatelessWidget {
                 height: 100.h,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: list.length,
+                  itemCount: categoriesList.length,
                   itemBuilder: (context, index) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -127,11 +137,13 @@ class HomeView extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: AppColors.primary),
                           ),
-                          child: AppImage(imageName: list[index].image),
+                          child: AppImage(
+                            imageName: categoriesList[index].image,
+                          ),
                         ),
                         5.ph,
                         Text(
-                          list[index].title,
+                          categoriesList[index].title,
                           textAlign: TextAlign.center,
                           style: theme.titleLarge!.copyWith(
                             fontSize: 12.sp,
@@ -152,6 +164,19 @@ class HomeView extends StatelessWidget {
 
             SliverToBoxAdapter(
               child: Text("Flash Sale", style: theme.titleLarge),
+            ),
+            SliverToBoxAdapter(child: 30.ph),
+
+            SliverToBoxAdapter(
+              child: TabList(
+                tabList: tabList,
+                onTap: (index) {
+                  setState(() {
+                    tabIndex = index;
+                  });
+                },
+                currentIndex: tabIndex,
+              ),
             ),
 
             SliverToBoxAdapter(child: 30.ph),

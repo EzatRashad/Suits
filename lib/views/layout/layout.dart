@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/views/layout/pages/home/home.dart';
+import 'package:suits/views/layout/pages/wishlist/wishlist.dart';
 
 class LayoutView extends StatefulWidget {
   const LayoutView({super.key});
@@ -22,7 +23,7 @@ class _LayoutViewState extends State<LayoutView> {
     Model(
       'favourite.svg',
       'favourite_active.svg',
-      () => Container(color: AppColors.hintText),
+      () => WishlistView(),
     ),
     Model(
       'profile.svg',
