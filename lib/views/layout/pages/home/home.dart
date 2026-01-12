@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
+import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/views/layout/pages/product_details/product_details.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -156,11 +158,16 @@ class HomeView extends StatelessWidget {
 
             SliverGrid(
               delegate: SliverChildBuilderDelegate((context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
-                  child: Container(
-                    color: AppColors.white,
-                    child: const AppImage(imageName: "pr.png"),
+                return GestureDetector(
+                  onTap: () {
+                    context.nextScreen(ProductDetailsView());
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Container(
+                      color: AppColors.white,
+                      child: const AppImage(imageName: "pr.png"),
+                    ),
                   ),
                 );
               }, childCount: 6),

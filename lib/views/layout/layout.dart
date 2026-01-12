@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
-import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/views/layout/pages/home/home.dart';
 
@@ -54,9 +53,7 @@ class _LayoutViewState extends State<LayoutView> {
                 child: AppImage(
                   width: 20.w,
                   height: 17.h,
-                  imageName: currentIndex == index
-                      ? list[index].activeImage
-                      : list[index].image,
+                  imageName: list[index].image,
                   color: currentIndex == index
                       ? AppColors.primary
                       : AppColors.navIcon,
