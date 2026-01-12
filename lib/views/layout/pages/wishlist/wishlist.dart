@@ -52,32 +52,60 @@ class _WishlistViewState extends State<WishlistView> {
             SliverToBoxAdapter(child: 32.ph),
             SliverGrid(
               delegate: SliverChildBuilderDelegate((context, index) {
-                return Stack(
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        context.nextScreen(ProductDetailsView());
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: Container(
-                          width: double.infinity,
-                          color: AppColors.white,
-                          child: AppImage(
-                            imageName: "pr.png",
-                            fit: BoxFit.fill,
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.r),
+                          child: Container(
+                            width: double.infinity,
+                            color: AppColors.white,
+                            child: AppImage(
+                              imageName: "pr.png",
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          top: 10.h,
+                          right: 10.w,
+                          child: CircleAvatar(
+                            backgroundColor: Color(
+                              0xffFFFFFF,
+                            ).withValues(alpha: .5),
+                            child: AppImage(imageName: "heart2.png"),
+                          ),
+                        ),
+                      ],
                     ),
-                    Positioned(
-                      top: 10.h,
-                      right: 10.w,
-                      child: CircleAvatar(
-                        backgroundColor: Color(
-                          0xffFFFFFF,
-                        ).withValues(alpha: .5),
-                        child: AppImage(imageName: "heart2.png"),
+                    12.ph,
+                    Row(
+                      children: [
+                        Text(
+                          "classic blazar",
+                          style: theme.titleMedium!.copyWith(
+                            fontSize: 14.sp,
+                            fontVariations: [FontVariation('wght', 500)],
+                          ),
+                        ),
+                        Spacer(),
+                        AppImage(imageName: "star.png"),
+                        Text(
+                          " 5.0",
+                          style: theme.titleMedium!.copyWith(
+                            color: const Color(0xff979696),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "#\$83.97",
+                      style: theme.titleMedium!.copyWith(
+                        color: const Color(0xffAB94A6),
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
@@ -85,9 +113,9 @@ class _WishlistViewState extends State<WishlistView> {
               }, childCount: 10),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 149.w / 140.h,
                 mainAxisSpacing: 16.h,
                 crossAxisSpacing: 16.w,
+                childAspectRatio: 0.65,
               ),
             ),
           ],
