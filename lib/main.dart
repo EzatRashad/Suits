@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const PaymentMethodsView(),
+      child: const SplashView(),
     );
   }
 }
