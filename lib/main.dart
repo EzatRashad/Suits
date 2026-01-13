@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_theme.dart';
-import 'package:suits/views/layout/pages/product_details/product_details.dart';
 import 'package:suits/views/layout/pages/profile/pages/payment_methods.dart';
 import 'package:suits/views/layout/pages/profile/profile.dart';
 import 'package:suits/views/splash.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const ProductDetailsView(),
+      child: const PaymentMethodsView(),
     );
   }
 }

@@ -84,7 +84,9 @@ class _SizeAndColorState extends State<SizeAndColor> {
                     size: size,
                     isSelected: isSelected,
                     onTap: () {
-                      setState(() => selectedSize = size);
+                      setState(() {
+                        selectedSize = isSelected ? null : size;
+                      });
                       widget.onValueChanges(
                         selectedSize != null && selectedColor != null,
                       );
