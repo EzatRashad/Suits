@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/widgets/App_image.dart';
 import 'package:suits/views/layout/pages/home/home.dart';
+import 'package:suits/views/layout/pages/profile/profile.dart';
 import 'package:suits/views/layout/pages/wishlist/wishlist.dart';
 
 class LayoutView extends StatefulWidget {
@@ -20,16 +21,8 @@ class _LayoutViewState extends State<LayoutView> {
       'cart_active.svg',
       () => Container(color: AppColors.black2),
     ),
-    Model(
-      'favourite.svg',
-      'favourite_active.svg',
-      () => WishlistView(),
-    ),
-    Model(
-      'profile.svg',
-      'profile_acive.svg',
-      () => Container(color: AppColors.primary),
-    ),
+    Model('favourite.svg', 'favourite_active.svg', () => WishlistView()),
+    Model('profile.svg', 'profile_acive.svg', () => ProfileView()),
   ];
 
   int currentIndex = 0;

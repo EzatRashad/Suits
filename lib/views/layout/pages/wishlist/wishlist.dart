@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
-import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
-import 'package:suits/views/layout/pages/product_details/product_details.dart';
 import 'package:suits/views/layout/widgets/tab_list.dart';
 
 class WishlistView extends StatefulWidget {
