@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/utils.dart';
+import 'package:suits/views/layout/pages/product_details/widgets/size_item.dart';
 
 class SizeAndColor extends StatefulWidget {
-  const SizeAndColor({super.key});
+  const SizeAndColor({super.key, required this.onValueChanges});
+  final ValueChanged<bool> onValueChanges;
 
   @override
   State<SizeAndColor> createState() => _SizeAndColorState();
@@ -11,6 +14,8 @@ class SizeAndColor extends StatefulWidget {
 
 class _SizeAndColorState extends State<SizeAndColor> {
   final List<String> sizes = ["S", "M", "L", "XL", "2XL"];
+  String? selectedSize;
+  Color? selectedColor;
 
   final List<Color> colors = [
     Color(0xffFF0000),
@@ -32,13 +37,31 @@ class _SizeAndColorState extends State<SizeAndColor> {
 
             Row(
               children: colors.map((color) {
-                return Container(
-                  height: 25.h,
-                  width: 25.w,
-                  margin: EdgeInsets.only(right: 5.w),
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
+                bool isSelected = selectedColor == color;
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedColor = isSelected ? null : color;
+                    });
+                    widget.onValueChanges(
+                      selectedColor != null && selectedSize != null,
+                    );
+                  },
+                  child: Container(
+                    height: isSelected ? 40 : 25.h,
+                    width: isSelected ? 40 : 25.w,
+                    margin: EdgeInsets.only(right: 5.w),
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.transparent,
+                        width: 2,
+                      ),
+                    ),
                   ),
                 );
               }).toList(),
@@ -47,25 +70,28 @@ class _SizeAndColorState extends State<SizeAndColor> {
         ),
         7.ph,
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Size:", style: theme.titleMedium),
             12.pw,
 
-            Row(
-              children: sizes.map((size) {
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5.w),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 5.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 217, 215, 215),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Text(size, style: theme.titleMedium),
-                );
-              }).toList(),
+            Expanded(
+              child: Wrap(
+                runSpacing: 5,
+                children: sizes.map((size) {
+                  final isSelected = selectedSize == size;
+                  return SizeItem(
+                    size: size,
+                    isSelected: isSelected,
+                    onTap: () {
+                      setState(() => selectedSize = size);
+                      widget.onValueChanges(
+                        selectedSize != null && selectedColor != null,
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),

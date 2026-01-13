@@ -5,7 +5,8 @@ import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
 
 class DetailsNav extends StatelessWidget {
-  const DetailsNav({super.key});
+  const DetailsNav({this.isEnable = false, super.key});
+  final bool isEnable;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,19 @@ class DetailsNav extends StatelessWidget {
             ),
             27.pw,
             GestureDetector(
-              onTap: () {},
+              onTap: isEnable
+                  ? () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Added to cart")),
+                      );
+                    }
+                  : null,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 65.w, vertical: 17.h),
                 decoration: BoxDecoration(
-                  color: AppColors.primary,
+                  color: AppColors.primary.withValues(
+                    alpha: isEnable ? 1 : 0.5,
+                  ),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Text(

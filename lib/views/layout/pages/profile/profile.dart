@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
+import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
+import 'package:suits/views/layout/pages/profile/pages/payment_methods.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -13,12 +15,12 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   final List<ItemModel> list = [
-    ItemModel(text: "Your Profile", image: "user.png"),
-    ItemModel(text: "My Order", image: "menu.png"),
-    ItemModel(text: "Payment Methods", image: "credit.png"),
-    ItemModel(text: "Wishlist", image: "heart.png"),
-    ItemModel(text: "Setting", image: "setting.png"),
-    ItemModel(text: "Log Out", image: "logout.png"),
+    ItemModel(text: "Your Profile", image: "user.png",  nextPage: Scaffold()),
+    ItemModel(text: "My Order", image: "menu.png", nextPage: Scaffold()),
+    ItemModel(text: "Payment Methods", image: "credit.png", nextPage: PaymentMethodsView()),
+    ItemModel(text: "Wishlist", image: "heart.png", nextPage: Scaffold()),
+    ItemModel(text: "Setting", image: "setting.png", nextPage: Scaffold()),
+    ItemModel(text: "Log Out", image: "logout.png", nextPage: Scaffold()),
   ];
 
   @override
@@ -62,24 +64,30 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               SliverList.separated(
                 itemCount: 5,
-                itemBuilder: (context, index) => Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(5.r),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 19.w,
-                    vertical: 17.h,
-                  ),
-                  child: Row(
-                    children: [
-                      AppImage(imageName: list[index].image),
-                      18.pw,
-                      Text(
-                        list[index].text,
-                        style: theme.titleMedium!.copyWith(fontSize: 15.sp),
-                      ),
-                    ],
+                itemBuilder: (context, index) => GestureDetector
+                (
+                  onTap: () {
+                    context.nextScreen(list[index].nextPage);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(5.r),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 19.w,
+                      vertical: 17.h,
+                    ),
+                    child: Row(
+                      children: [
+                        AppImage(imageName: list[index].image),
+                        18.pw,
+                        Text(
+                          list[index].text,
+                          style: theme.titleMedium!.copyWith(fontSize: 15.sp),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 separatorBuilder: (context, index) => 25.ph,
@@ -95,5 +103,6 @@ class _ProfileViewState extends State<ProfileView> {
 class ItemModel {
   final String text;
   final String image;
-  ItemModel({required this.text, required this.image});
+  final Widget nextPage;
+  ItemModel({required this.text, required this.image,  required this.nextPage});
 }

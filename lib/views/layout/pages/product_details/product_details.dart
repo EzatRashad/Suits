@@ -15,11 +15,13 @@ class ProductDetailsView extends StatefulWidget {
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
+  bool canAddToCart = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     return Scaffold(
-      bottomNavigationBar: DetailsNav(),
+      bottomNavigationBar: DetailsNav(isEnable: canAddToCart),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -72,7 +74,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                       ),
                     ),
                     Text(
-                      "cotton sweat shirt with a text point",
+                      "cotton sweat shirt with a text point" * 10,
                       style: theme.titleMedium!.copyWith(
                         color: const Color(0xff979696),
                         fontSize: 16.sp,
@@ -84,7 +86,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     26.ph,
                     Divider(color: Color(0xffB5B5B5)),
                     23.ph,
-                    SizeAndColor(),
+                    SizeAndColor(
+                      onValueChanges: (canAddToCart) {
+                        setState(() {
+this.canAddToCart = canAddToCart;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
