@@ -4,7 +4,9 @@ import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
+import 'package:suits/views/layout/pages/card/card.dart';
 import 'package:suits/views/layout/pages/profile/pages/payment_methods.dart';
+import 'package:suits/views/layout/pages/wishlist/wishlist.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -15,10 +17,18 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   final List<ItemModel> list = [
-    ItemModel(text: "Your Profile", image: "user.png",  nextPage: Scaffold()),
-    ItemModel(text: "My Order", image: "menu.png", nextPage: Scaffold()),
-    ItemModel(text: "Payment Methods", image: "credit.png", nextPage: PaymentMethodsView()),
-    ItemModel(text: "Wishlist", image: "heart.png", nextPage: Scaffold()),
+    ItemModel(text: "Your Profile", image: "user.png", nextPage: Scaffold()),
+    ItemModel(
+      text: "My Order",
+      image: "menu.png",
+      nextPage: CardView(isBack: true),
+    ),
+    ItemModel(
+      text: "Payment Methods",
+      image: "credit.png",
+      nextPage: PaymentMethodsView(),
+    ),
+    ItemModel(text: "Wishlist", image: "heart.png", nextPage: WishlistView(isBack: true)),
     ItemModel(text: "Setting", image: "setting.png", nextPage: Scaffold()),
     ItemModel(text: "Log Out", image: "logout.png", nextPage: Scaffold()),
   ];
@@ -64,8 +74,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               SliverList.separated(
                 itemCount: 5,
-                itemBuilder: (context, index) => GestureDetector
-                (
+                itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
                     context.nextScreen(list[index].nextPage);
                   },
@@ -104,5 +113,5 @@ class ItemModel {
   final String text;
   final String image;
   final Widget nextPage;
-  ItemModel({required this.text, required this.image,  required this.nextPage});
+  ItemModel({required this.text, required this.image, required this.nextPage});
 }

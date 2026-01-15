@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suits/core/style/app_colors.dart';
-import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/App_image.dart';
-import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/core/utils/navigate.dart';
+import 'package:suits/views/layout/pages/home/widgets/banner.dart';
+import 'package:suits/views/layout/pages/home/widgets/product_item_widget.dart';
 import 'package:suits/views/layout/pages/product_details/product_details.dart';
 import 'package:suits/views/layout/widgets/tab_list.dart';
 
@@ -22,8 +23,15 @@ class _HomeViewState extends State<HomeView> {
     Model(title: "Men Shoes", image: "men _shoes.png"),
     Model(title: "Women Shoes", image: "women _shoes.png"),
   ];
+
   final tabList = ["All", "Men", "Women", "Shoes", "Accessories", "Jewelry"];
   int tabIndex = 0;
+
+  List<Product> get filteredProducts {
+    if (tabIndex == 0) return allProducts; 
+    final selectedCategory = tabList[tabIndex];
+    return allProducts.where((p) => p.category == selectedCategory).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,6 @@ class _HomeViewState extends State<HomeView> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
-
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
@@ -42,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
                 child: Row(
                   children: [
                     Text(' Hello Safia', style: theme.titleLarge),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       width: 40.w,
                       height: 40.h,
@@ -58,47 +65,9 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
 
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 17.h),
-                decoration: const BoxDecoration(color: AppColors.white),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "New Collection",
-                            style: theme.titleLarge!.copyWith(fontSize: 16.sp),
-                          ),
-                          5.ph,
-                          Text(
-                            "Disscount 50% for\nthe first transaction",
-                            style: theme.titleSmall!.copyWith(
-                              fontSize: 12.sp,
-                              fontVariations: [
-                                const FontVariation("wght", 500),
-                              ],
-                            ),
-                          ),
-                          18.ph,
-                          AppButton(
-                            title: "Shop Now",
-                            height: 29.h,
-                            width: 100.w,
-                            radius: 10.r,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Expanded(child: AppImage(imageName: "banner.png")),
-                  ],
-                ),
-              ),
-            ),
+            SliverToBoxAdapter(child: AppBanner()),
 
-            SliverToBoxAdapter(child: 28.ph),
+            SliverToBoxAdapter(child: 18.ph),
 
             SliverToBoxAdapter(
               child: Row(
@@ -153,49 +122,46 @@ class _HomeViewState extends State<HomeView> {
                       ],
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return 25.pw;
-                  },
+                  separatorBuilder: (_, __) => 25.pw,
                 ),
               ),
             ),
 
-            SliverToBoxAdapter(child: 30.ph),
+            SliverToBoxAdapter(child: 18.ph),
 
             SliverToBoxAdapter(
               child: Text("Flash Sale", style: theme.titleLarge),
             ),
-            SliverToBoxAdapter(child: 30.ph),
+            SliverToBoxAdapter(child: 18.ph),
 
             SliverToBoxAdapter(
               child: TabList(
                 tabList: tabList,
-                onTap: (index) {
-                  setState(() {
-                    tabIndex = index;
-                  });
-                },
                 currentIndex: tabIndex,
+                onTap: (index) {
+                  setState(() => tabIndex = index);
+                },
               ),
             ),
 
             SliverToBoxAdapter(child: 30.ph),
 
             SliverGrid(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    context.nextScreen(ProductDetailsView());
-                  },
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => GestureDetector(
+                  onTap: () => context.nextScreen(const ProductDetailsView()),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.r),
                     child: Container(
                       color: AppColors.white,
-                      child: const AppImage(imageName: "pr.png"),
+                      child: AppImage(
+                        imageName: filteredProducts[index].imageName,
+                      ),
                     ),
                   ),
-                );
-              }, childCount: 6),
+                ),
+                childCount: filteredProducts.length,
+              ),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 149.w / 140.h,
