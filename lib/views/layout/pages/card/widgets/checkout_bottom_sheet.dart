@@ -32,9 +32,7 @@ class CheckoutBottomSheet extends StatelessWidget {
                   width: 88.w,
                   height: 24.h,
                   radius: 15,
-                  onTap: () {
-                    context.nextScreen(CheckoutView());
-                  },
+                  onTap: () {},
                   title: "Apply",
                 ),
               ),
@@ -55,10 +53,7 @@ class CheckoutBottomSheet extends StatelessWidget {
             ),
             AppButton(
               onTap: () {
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text("Order placed!")));
+                context.nextScreen(CheckoutView());
               },
               title: "Checkout",
             ),

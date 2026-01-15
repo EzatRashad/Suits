@@ -32,7 +32,6 @@ class PaymentView extends StatelessWidget {
               AppButton(
                 radius: 10,
                 onTap: () {
-                  context.nextScreen(PaymentView());
                 },
                 title: "View Order",
               ),

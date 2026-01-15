@@ -4,6 +4,7 @@ import 'package:suits/core/style/app_colors.dart';
 import 'package:suits/core/utils/navigate.dart';
 import 'package:suits/core/utils/utils.dart';
 import 'package:suits/core/widgets/button_widget.dart';
+import 'package:suits/views/layout/pages/card/add_card.dart';
 import 'package:suits/views/layout/pages/card/payment.dart';
 import 'package:suits/views/layout/pages/card/widgets/address_item.dart';
 import 'package:suits/views/layout/pages/card/widgets/card_item_widget.dart';
@@ -36,7 +37,7 @@ class _CheckoutViewState extends State<CheckoutView> {
           child: AppButton(
             radius: 10,
             onTap: () {
-              context.nextScreen(PaymentView());
+              context.nextScreen(AddCardView());
             },
             title: "Continue to payment",
           ),
